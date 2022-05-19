@@ -30,15 +30,15 @@ class NotesDatabase {
     const integerType = 'INTEGER NOT NULL';
 
     await db.execute('''
-CREATE TABLE $tableNotes ( 
-  ${NoteFields.id} $idType, 
-  ${NoteFields.isImportant} $boolType,
-  ${NoteFields.number} $integerType,
-  ${NoteFields.title} $textType,
-  ${NoteFields.description} $textType,
-  ${NoteFields.time} $textType
-  )
-''');
+      CREATE TABLE $tableNotes ( 
+        ${NoteFields.id} $idType, 
+        ${NoteFields.isImportant} $boolType,
+        ${NoteFields.number} $integerType,
+        ${NoteFields.title} $textType,
+        ${NoteFields.description} $textType,
+        ${NoteFields.time} $textType
+      )
+  ''');
   }
 
   Future<Note> create(Note note) async {
@@ -104,6 +104,19 @@ CREATE TABLE $tableNotes (
       where: '${NoteFields.id} = ?',
       whereArgs: [id],
     );
+  }
+
+  Future<List<Note>> findToTitle(String search) async {
+    final db = await instance.database;
+
+    const orderBy = '${NoteFields.time} ASC';
+
+    final result = await db.query(tableNotes, where: "title '%" + search + '%', orderBy: orderBy);
+
+    //final result1 = await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
+    //final result = await db.query(tableNotes, orderBy: orderBy);
+
+    return result.map((json) => Note.fromJson(json)).toList();
   }
 
   Future close() async {

@@ -11,6 +11,7 @@ class AddEditNotePage extends StatefulWidget {
     Key? key,
     this.note,
   }) : super(key: key);
+
   @override
   _AddEditNotePageState createState() => _AddEditNotePageState();
 }

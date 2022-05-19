@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sqflite/database/notes_db.dart';
 import 'package:flutter_sqflite/model/note.dart';
+import 'package:flutter_sqflite/ui/search_note.dart';
 import 'package:flutter_sqflite/widget/note_card_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'edit_note_page.dart';
@@ -48,7 +49,21 @@ class _NotesPageState extends State<NotesPage> {
         'Notes',
         style: TextStyle(fontSize: 24),
       ),
-      actions: const [Icon(Icons.search), SizedBox(width: 12)],
+
+      actions: <Widget>[
+        IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: DataSearch(notes));
+            })
+      ],
+
+      /*actions: const [
+        Icon(Icons.search),
+        SizedBox(width: 12)
+      ],*/
+
+
     ),
     body: Center(
       child: isLoading

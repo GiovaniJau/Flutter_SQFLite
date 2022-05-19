@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'ui/note_page.dart';
 
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -16,6 +17,8 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   static const String title = 'Notes SQLite';
+
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => MaterialApp(

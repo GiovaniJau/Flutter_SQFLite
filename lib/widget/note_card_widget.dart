@@ -13,14 +13,14 @@ final _lightColors = [
 ];
 
 class NoteCardWidget extends StatelessWidget {
+  final Note note;
+  final int index;
+
   const NoteCardWidget({
     Key? key,
     required this.note,
     required this.index,
   }) : super(key: key);
-
-  final Note note;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
